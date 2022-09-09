@@ -29,11 +29,11 @@ class MovieNotesController {
   async show(req, res) {
     const { id } = req.params;
 
-    const showNotes = await knex("movieNotes").where({ id }).first();
+    const note = await knex("movieNotes").where({ id }).first();
     const tags = await knex("movieTags").where({ note_id: id }).orderBy("name");
 
-    res.json({
-      ...showNotes,
+    return res.json({
+      ...note,
       tags,
     });
   }
